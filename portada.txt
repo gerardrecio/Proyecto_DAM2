@@ -1,0 +1,15 @@
+portada: logo & eslogan & descripcio de caracter promocional destinada a captar la atencio dels usuaris, clients, comunicadors etc
+menu: permetre navegar entre altres seccions
+
+descripcio: s'explica el producte o servei, cal fer-ho des d'una perspectiva comercial, textos breus i concisos i si pot ser mes visual que llegit.
+Requeriments globals: nomes el mes destacables, que la solucio sigui multiplataforma i responsive, oferir seguretat de dades, saber si es per discapacitats.
+
+Tecnologies i metodologies utilitzades: diagrama arquitectura modificado
+
+Arquitectura: s'han d'incloure requeriments de software i hardware
+
+Cost & temps: de manera esquematica es mostren els temps de desenvolupament, d'explotacio i si hi ha costos economics.
+
+Conclusions: es fara un breu reflexionament sobre el projecte.
+
+peu de pagina: hi haura un peu comu en totes les pagines en que hi figurin autors, nom del projecte, i centre, també hi haura forma de contacte
