@@ -7,12 +7,14 @@ password: 1234Asdf@
 
 datos mysql:
 
+ip: 217.76.150.112
 user: 	qadf185
 password: 1234Asdf
 
 FTP:
 
-Servidor Ftp:ftp.post-ticket.es
+Servidor Ftp: 217.76.150.112
+Puerto: 21
 Usuario principal:post-ticket.es
 Directorio en el servidor web: html.
 Password: 1234Asdf
