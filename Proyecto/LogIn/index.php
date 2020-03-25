@@ -26,6 +26,19 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+<!--jquery PLACEMENT-->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+    <!--jquery VALIDATE-->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+    <!--CDN SWEET ALERT-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <!--JQUERY SCRIPT-->
+    <script src="js/signup_main.js"></script>
+<!--===============================================================================================-->
 </head>
 <body>
 	
@@ -40,8 +53,8 @@
 
 				<form class="login100-form validate-form">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
-						<span class="label-input100">Username</span>
-						<input class="input100" type="text" name="username" placeholder="Enter username">
+						<span class="label-input100">Email</span>
+						<input class="input100" type="text" name="username" placeholder="Enter email">
 						<span class="focus-input100"></span>
 					</div>
 
