@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V15</title>
+	<title>Registre Post-Ticket</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+
+	    <!--jquery PLACEMENT-->
+		<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+		<!--jquery VALIDATE-->
+		<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+		<!--CDN SWEET ALERT-->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+		<!--JQUERY SCRIPT-->
+		<script src="js/signup_main.js"></script>
+
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -26,18 +40,6 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 
-    <!--jquery PLACEMENT-->
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-
-    <!--jquery VALIDATE-->
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-
-    <!--CDN SWEET ALERT-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
-    <!--JQUERY SCRIPT-->
-    <script src="js/signup_main.js"></script>
 <!--===============================================================================================-->
 </head>
 <body>
@@ -51,7 +53,8 @@
 					</span>
 				</div>
 
-				<form class="login100-form validate-form" id="contactForm">
+				<form class="login100-form validate-form" id="contactForm" novalidate="novalidate">
+					
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Email is required">
 						<span class="label-input100">Email</span>
 						<input class="input100 xemail" type="email" name="username" placeholder="Enter email">
@@ -76,13 +79,6 @@
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="flex-sb-m w-full p-b-30">
-						
-						<div class="contact100-form-checkbox">
-						</div>
-
-					</div>
-
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn xbutton">
 							Sign Up
@@ -93,8 +89,6 @@
 		</div>
 	</div>
 	
-<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->

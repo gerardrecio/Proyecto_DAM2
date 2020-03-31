@@ -29,8 +29,47 @@
             }
         }
 
+        if (check == true)
+        {
+            console.log("HOLA");
+            var xname = $('.xname').val();
+            var xpassword = $('.xpassword').val();
+
+            $.post("../php/login.php", {email: xname, password: xpassword}, 
+            
+            function(data){
+
+                console.log(data);
+
+                if (data == 1)
+                {
+                    setTimeout(marxarCorrecte, 2000);
+                }
+                else
+                {
+                    Swal.fire(
+                        'Incorrecte',
+                        'La compte no existeix',
+                        'error'
+                      );     
+                }
+            })
+        }
+        else
+        {
+            Swal.fire(
+                'Error',
+                'Camps incorrectes o buits',
+                'error'
+              );
+        }
+
         return check;
     });
+
+    function marxarCorrecte(){
+        window.location.replace("../../../index.html");
+    }
 
 
     $('.validate-form .input100').each(function(){

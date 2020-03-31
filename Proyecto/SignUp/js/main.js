@@ -29,8 +29,58 @@
             }
         }
 
+        if (check == true)
+        {
+
+            var xname = $('.xname').val();
+            var xemail = $('.xemail').val();
+            var xsurname = $('.xsurname').val();
+            var xpassword = $('.xpassword').val();
+
+            $.post("../php/registro.php", {email: xemail, name: xname, surname: xsurname, password: xpassword}, 
+            
+            function(data){
+
+                console.log(data);
+
+                if (data == 1)
+                {
+                    Swal.fire(
+                        'Correcte',
+                        'Compte creada exitosament',
+                        'success'
+                      );     
+
+                    //per redirigir
+                    setTimeout(marxarCorrecte, 2000);
+                }
+                else
+                {
+                    Swal.fire(
+                        'Incorrecte',
+                        'La compte no s\'ha pogut crear, ja existeix una compte amb aquest email',
+                        'error'
+                      );     
+                }
+            })
+   
+        }
+        else
+        {
+            Swal.fire(
+                'Error',
+                'Camps incorrectes o buits',
+                'error'
+              );
+        }
+
+
         return check;
     });
+
+    function marxarCorrecte(){
+        window.location.replace("../../../index.html");
+    }
 
 
     $('.validate-form .input100').each(function(){

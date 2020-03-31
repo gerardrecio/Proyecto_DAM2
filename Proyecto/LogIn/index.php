@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V15</title>
+	<title>Login Post-Ticket</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+
+	<!--jquery PLACEMENT-->
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+	<!--jquery VALIDATE-->
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+	<!--CDN SWEET ALERT-->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+	<script src="js/loginup_main.js"></script>
+
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -26,19 +39,6 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
-<!--jquery PLACEMENT-->
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-
-    <!--jquery VALIDATE-->
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-
-    <!--CDN SWEET ALERT-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
-    <!--JQUERY SCRIPT-->
-    <script src="js/signup_main.js"></script>
-<!--===============================================================================================-->
 </head>
 <body>
 	
@@ -51,16 +51,16 @@
 					</span>
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" id="contactForm">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
-						<span class="label-input100">Email</span>
-						<input class="input100" type="text" name="username" placeholder="Enter email">
+						<span class="label-input100">Username</span>
+						<input class="input100 xname" type="text" name="username" placeholder="Enter username">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
 						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="pass" placeholder="Enter password">
+						<input class="input100 xpassword" type="password" name="pass" placeholder="Enter password">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -70,7 +70,7 @@
 						</div>
 
 						<div>
-							<a href="#" class="txt1">
+							<a href="#" class="txt1 xforgot">
 								Forgot Password?
 							</a>
 						</div>
