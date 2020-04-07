@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
+    <title>Post-Ticket - Inicio</title>
 </head>
 
 <body>
@@ -28,10 +28,11 @@
         <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.html">Concept</a>
+                <a class="navbar-brand" href="index.html">POST-TICKET</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+				<!--
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-right-top">
                         <li class="nav-item">
@@ -131,7 +132,7 @@
                             </div>
                         </li>
                     </ul>
-                </div>
+                </div>-->
             </nav>
         </div>
         <!-- ============================================================== -->
@@ -152,47 +153,56 @@
                             <li class="nav-divider">
                                 Menu
                             </li>
+							
+							<li class="nav-item">
+								<a class="nav-link active" href="#" aria-expanded="false" data-target="#submenu-9" aria-controls="submenu-9"><i class="fas fa-fw fa-file"></i>Crear Taulell <span class="badge badge-success">9</span></a>
+							</li>
                             <li class="nav-item ">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
+                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fas fa-fw fa-file"></i>Taulells <span class="badge badge-success">6</span></a>
                                 <div id="submenu-1" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
+										<li class="nav-item">
+                                            <a class="nav-link" href="dashboard-finance.html">Inici</a>
+                                        </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-2" aria-controls="submenu-1-2">E-Commerce</a>
+                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-2" aria-controls="submenu-1-2">Taulells Propis</a>
                                             <div id="submenu-1-2" class="collapse submenu" style="">
                                                 <ul class="nav flex-column">
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="index.html">E Commerce Dashboard</a>
+                                                        <a class="nav-link" href="index.html">?</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="ecommerce-product.html">Product List</a>
+                                                        <a class="nav-link" href="ecommerce-product.html">?</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="ecommerce-product-single.html">Product Single</a>
+                                                        <a class="nav-link" href="ecommerce-product-single.html">?</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="ecommerce-product-checkout.html">Product Checkout</a>
+                                                        <a class="nav-link" href="ecommerce-product-checkout.html">?</a>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </li>
+										<!--
                                         <li class="nav-item">
                                             <a class="nav-link" href="dashboard-finance.html">Finance</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="dashboard-sales.html">Sales</a>
                                         </li>
+										-->
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-1" aria-controls="submenu-1-1">Infulencer</a>
+                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-1" aria-controls="submenu-1-1">Taulells Compartits</a>
                                             <div id="submenu-1-1" class="collapse submenu" style="">
                                                 <ul class="nav flex-column">
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="dashboard-influencer.html">Influencer</a>
+                                                        <a class="nav-link" href="dashboard-influencer.html">?</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="influencer-finder.html">Influencer Finder</a>
+                                                        <a class="nav-link" href="influencer-finder.html">?</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="influencer-profile.html">Influencer Profile</a>
+                                                        <a class="nav-link" href="influencer-profile.html">?</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -200,7 +210,8 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="nav-item">
+                            <!-- UI Elements
+							<li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>UI Elements</a>
                                 <div id="submenu-2" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
@@ -227,7 +238,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
+                            </li>-->
+							<!-- Chart
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-fw fa-chart-pie"></i>Chart</a>
                                 <div id="submenu-3" class="collapse submenu" style="">
@@ -253,6 +265,8 @@
                                     </ul>
                                 </div>
                             </li>
+							-->
+							<!-- Forms
                             <li class="nav-item ">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Forms</a>
                                 <div id="submenu-4" class="collapse submenu" style="">
@@ -275,6 +289,8 @@
                                     </ul>
                                 </div>
                             </li>
+							-->
+							<!-- Tables
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Tables</a>
                                 <div id="submenu-5" class="collapse submenu" style="">
@@ -288,9 +304,25 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li class="nav-divider">
-                                Features
+							-->
+							<li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Configurar Taulells</a>
+                                <div id="submenu-5" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="pages/general-table.html">?</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="pages/data-tables.html">?</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
+							
+                            <li class="nav-divider">
+                                Opcions
+                            </li>
+							<!--
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i> Pages </a>
                                 <div id="submenu-6" class="collapse submenu" style="">
@@ -340,6 +372,8 @@
                                     </ul>
                                 </div>
                             </li>
+							-->
+							<!--
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7"><i class="fas fa-fw fa-inbox"></i>Apps <span class="badge badge-secondary">New</span></a>
                                 <div id="submenu-7" class="collapse submenu" style="">
@@ -359,6 +393,8 @@
                                     </ul>
                                 </div>
                             </li>
+							-->
+							<!--
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8"><i class="fas fa-fw fa-columns"></i>Icons</a>
                                 <div id="submenu-8" class="collapse submenu" style="">
@@ -384,6 +420,8 @@
                                     </ul>
                                 </div>
                             </li>
+							-->
+							<!--
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-9" aria-controls="submenu-9"><i class="fas fa-fw fa-map-marker-alt"></i>Maps</a>
                                 <div id="submenu-9" class="collapse submenu" style="">
@@ -397,6 +435,8 @@
                                     </ul>
                                 </div>
                             </li>
+							-->
+							<!--
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-10" aria-controls="submenu-10"><i class="fas fa-f fa-folder"></i>Menu Level</a>
                                 <div id="submenu-10" class="collapse submenu" style="">
@@ -419,6 +459,23 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Level 3</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+							-->
+							<li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fa fa-fw fa-user-circle"></i> Perfil </a>
+                                <div id="submenu-6" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="pages/account.html">Conta</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="pages/configuration.html">Configuració</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="../LogIn/index.php">Tancar Sessió</a>
                                         </li>
                                     </ul>
                                 </div>
