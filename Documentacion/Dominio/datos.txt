@@ -7,7 +7,7 @@ password: 1234Asdf@
 
 datos mysql:
 
-ip: 217.76.150.112
+ip: 217.76.150.88
 user: 	qadf185
 password: 1234Asdf
 
