@@ -40,6 +40,7 @@ CREATE TABLE tasques (
     titol varchar (50) not null,
     cos_missatge varchar (2000),
     id_categoria integer not null,
+    estat integer,
     CONSTRAINT FK_TASQUES_CATEGORIES FOREIGN KEY (id_categoria)
     REFERENCES categories (id)
 		ON delete CASCADE
@@ -47,7 +48,6 @@ CREATE TABLE tasques (
     primary key (id)
 )engine=InnoDB;
 
-/*AIXO S'HA DE CAMBIAR A TAULELL_USUARIS*/
 CREATE TABLE taulell_usuaris (
 	mail varchar (100) not null,
     id_taulell integer not null,
