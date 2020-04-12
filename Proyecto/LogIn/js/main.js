@@ -43,6 +43,10 @@
 
                 if (data == 1)
                 {
+                    Swal.fire('Login correcte',
+                            'Redirigint',
+                            'success'
+                        );
                     setTimeout(marxarCorrecte, 2000);
                 }
                 else
@@ -68,7 +72,7 @@
     });
 
     function marxarCorrecte(){
-        window.location.replace("../../../index.html");
+        window.location.replace("../post_ticket/index.php");
     }
 
 
