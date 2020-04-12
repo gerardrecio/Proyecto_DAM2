@@ -87,6 +87,37 @@ CREATE TABLE rols_usuaris_taulells (
     primary key (mail, id_rol, id_taulell)
 )engine=InnoDB;
 
+/* _______ nueva tabla ______ */
+CREATE TABLE tasques_usuaris (
+
+	id_tasca int,
+    
+	mail_usuari varchar(100),
+
+    	primary key (id_tasca,mail_usuari),
+
+    
+    CONSTRAINT FK_TASQUESUSUARIS_TASQUES FOREIGN KEY (id_tasca)
+
+		REFERENCES tasques (id)
+			
+			ON DELETE CASCADE
+            
+			ON UPDATE CASCADE,
+
+	CONSTRAINT FK_TASQUESUSUARIS_USUARIS FOREIGN KEY (mail_usuari)
+
+		REFERENCES usuaris (mail)
+
+			ON DELETE CASCADE
+
+            ON UPDATE CASCADE
+		
+
+
+
+) ENGINE=INNODB;
+
 /* INSERTS DE PROVA */
 
 INSERT INTO rols (nom) VALUES ('developer');
