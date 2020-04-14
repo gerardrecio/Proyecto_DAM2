@@ -1,3 +1,12 @@
+<?php
+	session_start();	//iniciem la sessio
+
+	if ($_SESSION['email'] != '')
+	{
+		header('Location: http://post-ticket.es/Proyecto/post_ticket/index.php');
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,9 +61,9 @@
 				</div>
 
 				<form class="login100-form validate-form" id="contactForm">
-					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
-						<span class="label-input100">Username</span>
-						<input class="input100 xname" type="text" name="username" placeholder="Enter username">
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Mail is required">
+						<span class="label-input100">Mail</span>
+						<input class="input100 xname" type="text" name="username" placeholder="Enter Mail">
 						<span class="focus-input100"></span>
 					</div>
 

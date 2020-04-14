@@ -118,6 +118,19 @@ CREATE TABLE tasques_usuaris (
 
 ) ENGINE=INNODB;
 
+/* USUARI CREADOR DEL TAULELL */
+alter table taulells add creador varchar(100) not null default '';
+
+ALTER TABLE taulells ALTER creador DROP DEFAULT;
+alter TABLE taulells add CONSTRAINT FK_TAULELLS_CREADOR
+	FOREIGN KEY (creador)
+ 	references usuaris(mail)
+
+	on update cascade
+
+        on delete cascade;
+alter table taulells add finalitzat boolean not null default false;
+
 /* INSERTS DE PROVA */
 
 INSERT INTO rols (nom) VALUES ('developer');

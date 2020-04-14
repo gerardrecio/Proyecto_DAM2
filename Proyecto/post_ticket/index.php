@@ -1,6 +1,12 @@
 
 <?php
     require('php/functions.php');
+    session_start();
+
+    if ($_SESSION['email'] == '')
+    {
+        header('Location: http://post-ticket.es');
+    }
 ?>
 
 <!doctype html>
@@ -20,6 +26,9 @@
     <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="js/main_index.js"></script>
     <title>Post-Ticket - Inicio</title>
 </head>
 
@@ -33,7 +42,7 @@
         <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.html">POST-TICKET</a>
+                <a class="navbar-brand" href="index.php">POST-TICKET</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -167,24 +176,15 @@
                                 <div id="submenu-1" class="collapse submenu">
                                     <ul class="nav flex-column">
 										<li class="nav-item">
-                                            <a class="nav-link" href="dashboard-finance.html">Inici</a>
+                                            <a class="nav-link" href="index.php">Inici</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-2" aria-controls="submenu-1-2">Taulells Propis</a>
+                                            <a class="nav-link xexpand_propis" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-2" aria-controls="submenu-1-2">Taulells Propis</a>
                                             <div id="submenu-1-2" class="collapse submenu">
                                                 <ul class="nav flex-column">
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" href="index.html">?</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" href="ecommerce-product.html">?</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" href="ecommerce-product-single.html">?</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" href="ecommerce-product-checkout.html">?</a>
-                                                    </li>
+                                                <?php
+                                                    create_table_propierty($_SESSION['email']);
+                                                ?>
                                                 </ul>
                                             </div>
                                         </li>
@@ -200,15 +200,9 @@
                                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-1" aria-controls="submenu-1-1">Taulells Compartits</a>
                                             <div id="submenu-1-1" class="collapse submenu">
                                                 <ul class="nav flex-column">
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" href="dashboard-influencer.html">?</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" href="influencer-finder.html">?</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" href="influencer-profile.html">?</a>
-                                                    </li>
+                                                    <?php
+                                                        create_table_shared($_SESSION['email']);
+                                                    ?>
                                                 </ul>
                                             </div>
                                         </li>
@@ -314,12 +308,9 @@
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Configurar Taulells</a>
                                 <div id="submenu-5" class="collapse submenu">
                                     <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="pages/general-table.html">?</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="pages/data-tables.html">?</a>
-                                        </li>
+                                        <?php
+                                            create_conf_propierty($_SESSION['email']);
+                                        ?>
                                     </ul>
                                 </div>
                             </li>
@@ -474,13 +465,10 @@
                                 <div id="submenu-6" class="collapse submenu">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/account.html">Compte</a>
+                                            <a class="nav-link" href="account.php">Compte</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/configuration.html">Configuració</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="../LogIn/index.php">Tancar Sessió</a>
+                                            <a class="nav-link" href="php/logout.php">Tancar Sessió</a>
                                         </li>
                                     </ul>
                                 </div>

@@ -15,23 +15,20 @@ $link = mysqli_connect('217.76.150.88', 'qadf185', '1234Asdf', 'qadf185');
 
     //$query = "INSERT INTO usuaris (mail, nom, cognom, pwd, administrador) VALUES ('$email', '$name', '$surname', '$password', '0')";
 
-    $query = "SELECT pwd FROM usuaris WHERE mail = '$email'";
+    $query = "SELECT mail FROM usuaris WHERE pwd = '$password' and mail = '$email'";
 
     $xcompare = mysqli_query($link, $query);
 
-    $row = mysqli_fetch_assoc($xcompare);
+    echo mysqli_num_rows($xcompare);
 
-    if (password_verify($password, $row['pwd']))
+    /*if (mysqli_num_rows($xcompare) == 1)
     {
-        //iniciem la sessio
-        session_start();
-        $_SESSION['email'] = $_POST['email'];
         echo 1;
     }
     else
     {
         echo 0;
-    }
+    }*/
 
     mysqli_close($link);
  

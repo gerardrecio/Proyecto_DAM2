@@ -15,7 +15,9 @@ $link = mysqli_connect('217.76.150.88', 'qadf185', '1234Asdf', 'qadf185');
     $surname = $_POST['surname'];
     $password = $_POST['password'];
 
-    $query = "INSERT INTO usuaris (mail, nom, cognom, pwd, administrador) VALUES ('$email', '$name', '$surname', '$password', '0')";
+    $pwdcrypt = password_hash($password, PASSWORD_BCRYPT);
+
+    $query = "INSERT INTO usuaris (mail, nom, cognom, pwd, administrador) VALUES ('$email', '$name', '$surname', '$pwdcrypt', '0')";
 
     $xcompare = mysqli_query($link, $query);
 
