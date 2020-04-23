@@ -131,6 +131,21 @@ alter TABLE taulells add CONSTRAINT FK_TAULELLS_CREADOR
         on delete cascade;
 alter table taulells add finalitzat boolean not null default false;
 
+alter table tasques add asignat varchar(100);
+
+alter TABLE tasques add CONSTRAINT FK_TASQUES_ASIGNAT
+
+	FOREIGN KEY (asignat)
+
+ 	references usuaris(mail)
+
+
+	on update cascade
+
+	on delete set null;
+
+alter table tasques add data_limit date;
+
 /* INSERTS DE PROVA */
 
 INSERT INTO rols (nom) VALUES ('developer');

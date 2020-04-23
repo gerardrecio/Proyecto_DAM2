@@ -493,13 +493,15 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h2 class="pageheader-title">Home</h2>
+                                <h2 class="pageheader-title">Taulells Propis</h2>
                                 <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Home</li>
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Taulells</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page"><?php
+                                                echo obtenir_nom_taulell_GET();
+                                            ?></li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -512,10 +514,10 @@
                     <div class="ecommerce-widget">
 
                         <div class="row">
-                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="text-muted">Total Tasques</h5>
+                                        <h5 class="text-muted">Tasques Actuals</h5>
                                         <div class="metric-value d-inline-block">
                                             <h1 class="mb-1"><?php
                                                 obtain_total_tasques_per_usuari($_SESSION['email']);
@@ -528,10 +530,10 @@
                                     <!--<div id="sparkline-revenue"></div>-->
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="text-muted">Tasques Creades per mi</h5>
+                                        <h5 class="text-muted">Tasques Finalitzades</h5>
                                         <div class="metric-value d-inline-block">
                                             <h1 class="mb-1"><?php
                                                 obtain_total_tasques_creades_usuari($_SESSION['email']);
@@ -544,10 +546,10 @@
                                     <!--<div id="sparkline-revenue2"></div>-->
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="text-muted">Tasques Assignades</h5>
+                                        <h5 class="text-muted">Tasques Totals</h5>
                                         <div class="metric-value d-inline-block">
                                             <h1 class="mb-1"><?php
 												obtain_total_tasques_assignades_usuari($_SESSION['email'])
@@ -560,22 +562,23 @@
                                     <!--<div id="sparkline-revenue3"></div>-->
                                 </div>
                             </div>
+                            <!--
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="text-muted">Taulells participats</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1"><?php 
-												obtain_taulells_participats($_SESSION['email'])
-											?></h1>
-                                        </div>
+                                            <h1 class="mb-1">-->
+                                            
+                                            <!--</h1>
+                                        </div>-->
                                         <!--<div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
                                             <span>-2.00%</span>
                                         </div>-->
-                                    </div>
+                                    <!--</div>-->
                                     <!--<div id="sparkline-revenue4"></div>-->
-                                </div>
-                            </div>
+                                <!--</div>
+                            </div>-->
                         </div>
                         <div class="row">
                             <!-- ============================================================== -->
@@ -586,120 +589,57 @@
                             <!-- ============================================================== -->
                             <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Tasques Recents</h5>
-                                    <div class="card-body p-0">
+                                    <h5 class="card-header">Tasques</h5>
+                                    <div class="card-body">
+                                    
                                         <div class="table-responsive">
-                                            <table class="table">
-                                                <thead class="bg-light">
-                                                    <tr class="border-0">
-                                                        <th class="border-0">#</th>
-                                                        <th class="border-0">Nom Taulell</th>
-                                                        <th class="border-0">Nom Tasca</th>
-                                                        <th class="border-0">Categoria</th>
-                                                        <th class="border-0">Assignada</th>
-                                                        <th class="border-0">Estat</th>
-                                                        <th class="border-0">Data Limit</th>
-														<!--
-                                                        <th class="border-0">***</th>
-                                                        <th class="border-0">***</th>
-														-->
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Tasca</th>
+                                                    <th scope="col">Assignada</th>
+                                                    <th scope="col">Data</th>
+                                                    <th scope="col">Estat</th>
+                                                    <th scope="col">Veure</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-												<?php
-													obtain_tasques_inici_taula($_SESSION['email'])
-													?>
-													<!--
                                                     <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <div class="m-r-10"><img src="assets/images/product-pic.jpg" alt="user" class="rounded" width="45"></div>
-                                                        </td>
-                                                        <td>Product #1 </td>
-                                                        <td>id000001 </td>
-                                                        <td>20</td>
-                                                        <td>$80.00</td>
-                                                        <td>27-08-2018 01:22:12</td>
-                                                        <td>Patricia J. King </td>
-                                                        <td><span class="badge-dot badge-brand mr-1"></span>InTransit </td>
-                                                        <td><a href="#" class="btn btn-outline-light float-right">Detalls</a></td>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>
-                                                            <div class="m-r-10"><img src="assets/images/product-pic-2.jpg" alt="user" class="rounded" width="45"></div>
-                                                        </td>
-                                                        <td>Product #2 </td>
-                                                        <td>id000002 </td>
-                                                        <td>12</td>
-                                                        <td>$180.00</td>
-                                                        <td>25-08-2018 21:12:56</td>
-                                                        <td>Rachel J. Wicker </td>
-                                                        <td><span class="badge-dot badge-success mr-1"></span>Delivered </td>
-                                                        <td><a href="#" class="btn btn-outline-light float-right">Detalls</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>
-                                                            <div class="m-r-10"><img src="assets/images/product-pic-3.jpg" alt="user" class="rounded" width="45"></div>
-                                                        </td>
-                                                        <td>Product #3 </td>
-                                                        <td>id000003 </td>
-                                                        <td>23</td>
-                                                        <td>$820.00</td>
-                                                        <td>24-08-2018 14:12:77</td>
-                                                        <td>Michael K. Ledford </td>
-                                                        <td><span class="badge-dot badge-success mr-1"></span>Delivered </td>
-                                                        <td><a href="#" class="btn btn-outline-light float-right">Detalls</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>4</td>
-                                                        <td>
-                                                            <div class="m-r-10"><img src="assets/images/product-pic-4.jpg" alt="user" class="rounded" width="45"></div>
-                                                        </td>
-                                                        <td>Product #4 </td>
-                                                        <td>id000004 </td>
-                                                        <td>34</td>
-                                                        <td>$340.00</td>
-                                                        <td>23-08-2018 09:12:35</td>
-                                                        <td>Michael K. Ledford </td>
-                                                        <td><span class="badge-dot badge-success mr-1"></span>Delivered </td>
-                                                        <td><a href="#" class="btn btn-outline-light float-right">Detalls</a></td>
-                                                    </tr>
-													-->
                                                 </tbody>
                                             </table>
                                         </div>
+
+                                        <nav class="float-right mt-3" aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
                                     </div>
                                 </div>
                             </div>
-                            <!-- ============================================================== -->
-                            <!-- end recent orders  -->
 
-    
-                            <!-- ============================================================== -->
-                            <!-- ============================================================== -->
-                            <!-- customer acquistion  -->
-                            <!-- ============================================================== -->
-                            <!--<div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                                <div class="card">
-                                    <h5 class="card-header">Customer Acquisition</h5>
-                                    <div class="card-body">
-                                        <div class="ct-chart ct-golden-section" style="height: 354px;"></div>
-                                        <div class="text-center">
-                                            <span class="legend-item mr-2">
-                                                    <span class="fa-xs text-primary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                            <span class="legend-text">Returning</span>
-                                            </span>
-                                            <span class="legend-item mr-2">
-
-                                                    <span class="fa-xs text-secondary mr-1 legend-tile"><i class="fa fa-fw fa-square-full"></i></span>
-                                            <span class="legend-text">First Time</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
 
                             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12">
                                 <div class="card">

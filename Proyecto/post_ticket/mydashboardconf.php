@@ -23,7 +23,9 @@
     <link rel="stylesheet" href="assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="js/main_account.js"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="js/main_dashboardconf.js"></script>
     <title>Post-Ticket - Perfil</title>
 </head>
 
@@ -142,12 +144,12 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h3 class="mb-2">Compte </h3>
+                                <h3 class="mb-2">Configurar Taulells </h3>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item">Perfil</li>
-                                            <li class="breadcrumb-item active" aria-current="page">Compte</li>
+                                            <li class="breadcrumb-item">Dashboard</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Configurar Taulells</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -170,21 +172,21 @@
                             <!-- ============================================================== -->
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="user-avatar text-center d-block">
+                                    <!--<div class="user-avatar text-center d-block">
                                         <img src="assets/images/avatar-1.jpg" alt="User Avatar" class="rounded-circle user-avatar-xxl">
-                                    </div>
+                                    </div>-->
                                     <div class="text-center">
-                                        <h2 class="font-24 mb-0"><?php
-											obtain_nom_cognom($_SESSION['email']);
+                                        <h2 class="font-24 mb-0 xnom_taulell"><?php
+											obtain_nom_taulell_get_conf($_GET['id_taulell']);
 										?></h2>
                                     </div>
                                 </div>
                                 <div class="card-body border-top">
-                                    <h3 class="font-16">Contact Information</h3>
+                                    <h3 class="font-16">Creador</h3>
                                     <div class="">
                                         <ul class="list-unstyled mb-0">
-                                        <li class="mb-2 xcontact_info"><i class="fas fa-fw fa-envelope mr-2"></i><?php
-											echo $_SESSION['email']
+                                        <li class="mb-2 xnom_email"><i class="fas fa-fw fa-envelope mr-2"></i><?php
+											echo $_SESSION['email']." (".return_nom_cognom($_SESSION['email']).")";
 										?></li>
                                     </ul>
                                     </div>
@@ -207,17 +209,16 @@
                             <div class="influence-profile-content pills-regular">
                                 <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="pills-campaign-tab" data-toggle="pill" href="#pills-campaign" role="tab" aria-controls="pills-campaign" aria-selected="true">Taulells</a>
-                                    </li>
-									<!--
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="pills-packages-tab" data-toggle="pill" href="#pills-packages" role="tab" aria-controls="pills-packages" aria-selected="false">Configuració</a>
+                                        <a class="nav-link active" id="pills-campaign-tab" data-toggle="pill" href="#pills-campaign" role="tab" aria-controls="pills-campaign" aria-selected="true">Vista General</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-selected="false">Reviews</a>
-                                    </li>-->
+                                        <a class="nav-link xclick_rolsuser" id="pills-packages-tab" data-toggle="pill" href="#pills-packages" role="tab" aria-controls="pills-packages" aria-selected="false">Assignar Rols Usuari</a>
+                                    </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="pills-msg-tab" data-toggle="pill" href="#pills-msg" role="tab" aria-controls="pills-msg" aria-selected="false">Configuració</a>
+                                        <a class="nav-link xclick_deleteuser" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-selected="false">Eliminar Usuaris</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-msg-tab" data-toggle="pill" href="#pills-msg" role="tab" aria-controls="pills-msg" aria-selected="false">Compartir Taulell</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
@@ -233,9 +234,9 @@
                                                     <div class="card-body">
                                                         <h1 class="mb-1">
 														<?php
-															obtain_incidencies_creades($_SESSION['email'])
+															obtain_total_tasques_taulell($_GET['id_taulell'],$_SESSION['email'])
 														?></h1>
-                                                        <p>Taulells creats</p>
+                                                        <p>Tasques Totals</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -244,9 +245,9 @@
                                                     <div class="card-body">
                                                         <h1 class="mb-1">
 														<?php
-															obtain_total_incidencies($_SESSION['email'])
+															obtain_pendent_tasques_taulell($_GET['id_taulell'],$_SESSION['email'])
 														?></h1>
-                                                        <p>Taulells compartits</p>
+                                                        <p>Tasques Pendents</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -255,58 +256,7 @@
                                                     <div class="card-body">
                                                         <h1 class="mb-1">
 														<?php
-															obtain_incidencies_proces($_SESSION['email'])
-														?></h1>
-                                                        <p>Taulells en procés</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h1 class="mb-1">
-														<?php
-															obtain_incidencies_finalitzat($_SESSION['email'])
-														?></h1>
-                                                        <p>Taulells finalitzats</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-										<div class="row">
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                <div class="section-block">
-                                                    <h3 class="section-title">Estats de les meves tasques</h3>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h1 class="mb-1">
-														<?php
-															obtain_tasques_creades($_SESSION['email'])
-														?></h1>
-                                                        <p>Tasques creades</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h1 class="mb-1">
-														<?php
-															obtain_tasques_pendents_asignades($_SESSION['email'])
-														?></h1>
-                                                        <p>Tasques pendents</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h1 class="mb-1">
-														<?php
-															obtain_tasques_proces_asignades($_SESSION['email'])
+															obtain_proces_tasques_taulell($_GET['id_taulell'],$_SESSION['email'])
 														?></h1>
                                                         <p>Tasques en procés</p>
                                                     </div>
@@ -317,36 +267,104 @@
                                                     <div class="card-body">
                                                         <h1 class="mb-1">
 														<?php
-															obtain_tasques_finalitzades_asignades($_SESSION['email'])
+															obtain_finalitzades_tasques_taulell($_GET['id_taulell'],$_SESSION['email'])
 														?></h1>
-                                                        <p>Tasques finalitzades</p>
+                                                        <p>Tasques Finalitzats</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-msg" role="tabpanel" aria-labelledby="pills-msg-tab">
+
                                         <div class="card">
-                                            <h5 class="card-header">Canviar contrasenya</h5>
+                                            <h5 class="card-header">Crear Categories</h5>
                                             <div class="card-body">
-                                                <form>
+                                                <form class="xcategoria_taulell">
                                                     <div class="row">
                                                         <div class="offset-xl-3 col-xl-6 offset-lg-3 col-lg-3 col-md-12 col-sm-12 col-12 p-4">
                                                             <div class="form-group">
-                                                                <label for="pwd">Contrasenya</label>
-                                                                <input type="password" class="form-control form-control-lg xpassword2" id="pwd" placeholder="">
+                                                                <label for="pwd">Nom de la Categoria</label>
+                                                                <input type="text" class="form-control form-control-lg xescriure_categoria" id="email" placeholder="">
                                                             </div>
-															<div class="form-group">
-                                                                <label for="pwd2">Repetir Contrasenya</label>
-                                                                <input type="password" class="form-control form-control-lg xpassword" id="pwd2" placeholder="">
-                                                            </div>
-                                                            <button type="submit" class="btn btn-primary float-right xcanviar_password">Aplicar canvis</button>
+                                                            <button type="submit" class="btn btn-primary float-right xcrear_categories">Crear Categoria</button>
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="tab-pane fade" id="pills-msg" role="tabpanel" aria-labelledby="pills-msg-tab">
+                                        <div class="card">
+                                            <h5 class="card-header">Compartir Taulell</h5>
+                                            <div class="card-body">
+                                                <form class="xcompartir_taulell">
+                                                    <div class="row">
+                                                        <div class="offset-xl-3 col-xl-6 offset-lg-3 col-lg-3 col-md-12 col-sm-12 col-12 p-4">
+                                                            <div class="form-group">
+                                                                <label for="pwd">Email a qui es comparteix (acabar amb ";")</label>
+                                                                <input type="text" class="form-control form-control-lg xescriure_compartit" id="email" placeholder="">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="pwd">Es compartira a:</label>
+                                                                <ul class="list-group xcrear_llistacompartida">
+                                                                </ul>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary float-right xcompartir_noms">Compartir</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="pills-packages" role="tabpanel" aria-labelledby="pills-packages-tab">
+                                        <div class="card">
+                                            <h5 class="card-header">Assignar Rols Usuaris</h5>
+                                            <div class="card-body">
+                                            
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Rol Actual</th>
+                                                            <th scope="col">Nou Rol</th>
+                                                            <th scope="col">Activació</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="xcrear_taularols">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+                                        <div class="card">
+                                            <h5 class="card-header">Eliminar Usuaris</h5>
+                                            <div class="card-body">
+                                            
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Tasques Assignades</th>
+                                                            <th scope="col">Eliminar</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="xcrear_taulaeliminar">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <!-- ============================================================== -->
