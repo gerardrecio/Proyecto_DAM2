@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="js/main_index.js"></script>
+    <script src="js/main_dashboard.js"></script>
     <title>Post-Ticket - Inicio</title>
 </head>
 
@@ -520,7 +520,7 @@
                                         <h5 class="text-muted">Tasques Actuals</h5>
                                         <div class="metric-value d-inline-block">
                                             <h1 class="mb-1"><?php
-                                                obtain_total_tasques_per_usuari($_SESSION['email']);
+                                                obtain_tasques_taulell_propi_no_fi($_SESSION['email'],$_GET['id_taulell']);
                                             ?></h1>
                                         </div>
                                         <!--<div class="metric-label d-inline-block float-right text-success font-weight-bold">
@@ -536,7 +536,7 @@
                                         <h5 class="text-muted">Tasques Finalitzades</h5>
                                         <div class="metric-value d-inline-block">
                                             <h1 class="mb-1"><?php
-                                                obtain_total_tasques_creades_usuari($_SESSION['email']);
+                                                obtain_tasques_taulell_propi_fi($_SESSION['email'],$_GET['id_taulell']);
                                             ?></h1>
                                         </div>
                                         <!--<div class="metric-label d-inline-block float-right text-success font-weight-bold">
@@ -552,7 +552,7 @@
                                         <h5 class="text-muted">Tasques Totals</h5>
                                         <div class="metric-value d-inline-block">
                                             <h1 class="mb-1"><?php
-												obtain_total_tasques_assignades_usuari($_SESSION['email'])
+												obtain_tasques_taulell_propi($_SESSION['email'],$_GET['id_taulell'])
 											?></h1>
                                         </div>
                                         <!--<div class="metric-label d-inline-block float-right text-primary font-weight-bold">
@@ -598,42 +598,20 @@
                                                     <tr>
                                                     <th scope="col">#</th>
                                                     <th scope="col">Tasca</th>
+                                                    <th scope="col">Categoria</th>
                                                     <th scope="col">Assignada</th>
                                                     <th scope="col">Data</th>
                                                     <th scope="col">Estat</th>
                                                     <th scope="col">Veure</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    </tr>
+                                                <tbody class="xcrear_tauladash">
                                                 </tbody>
                                             </table>
                                         </div>
 
                                         <nav class="float-right mt-3" aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                                <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                                </li>
+                                            <ul class="pagination xpagination">
                                             </ul>
                                         </nav>
                                     </div>

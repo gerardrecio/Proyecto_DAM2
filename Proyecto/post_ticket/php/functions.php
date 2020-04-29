@@ -171,8 +171,39 @@
         //aqui es te que eliminar l'ultima coma de el text*/
 
         echo $final;
+		
+		mysqli_close($link);
 
     }
+	
+	function create_table_shared_new($idx){
+		$final;
+		
+		$link = mysqli_connect('217.76.150.88', 'qadf185', '1234Asdf', 'qadf185');
+		
+		$query = "select concat(concat(t.nom,' | '),t.creador) as nom from taulells as t inner join taulell_usuaris as tu on tu.id_taulell = t.id where tu.mail = '$idx'";
+		
+		$resultat = mysqli_query($link, $query);
+		
+		$myArrx = array();
+		
+		while ($row = mysqli_fetch_assoc($resultat))
+        {
+            array_push($myArrx, array('nom' => $row["nom"]));
+        }
+		
+		foreach ($myArrx as $valor){
+
+            $nomArray = $valor['nom'];
+
+            $final.= "<li class='nav-item'><a class='nav-link' href='mydashboard.php?id_taulell=$nomArray'>$nomArray</a></li>";
+        }
+
+        //aqui es te que eliminar l'ultima coma de el text*/
+
+        echo $final;
+			
+	}
 
 	//passem l'index (el correu) per obtenir totes els taulells creats per l'usuari
     function obtain_incidencies_creades($idx){
@@ -502,7 +533,7 @@
 		$link = mysqli_connect('217.76.150.88', 'qadf185', '1234Asdf', 'qadf185');
         //realitzem les operacions pertinents
 
-        $query = "select distinct t.nom as nomtaulell, ta.titol as nomtasca, ca.nom as nomcat, ta.asignat, est.descripcio as estat, ta.data_limit as datalimit, ta.estat from taulells as t left join taulell_usuaris as tu ON t.id = tu.id_taulell left join categories as ca ON t.id = ca.id_taulells inner join tasques as ta ON ca.id = ta.id_categoria left join estats as est ON ta.estat = est.id WHERE (t.creador = '$idx' or tu.mail = '$idx') and ta.titol is not null and ta.estat <> 3  order by data_limit desc";
+        $query = "select distinct t.nom as nomtaulell, ta.titol as nomtasca, ca.nom as nomcat, ta.asignat, est.descripcio as estat, DATE_FORMAT(ta.data_limit, '%d-%m-%Y') as datalimit, ta.estat from taulells as t left join taulell_usuaris as tu ON t.id = tu.id_taulell left join categories as ca ON t.id = ca.id_taulells inner join tasques as ta ON ca.id = ta.id_categoria left join estats as est ON ta.estat = est.id WHERE (t.creador = '$idx' or tu.mail = '$idx') and ta.titol is not null and ta.estat <> 3  order by data_limit desc limit 5";
 
         $resultat = mysqli_query($link, $query);
 		$index = 1;
@@ -549,6 +580,38 @@
 		$link = mysqli_connect('217.76.150.88', 'qadf185', '1234Asdf', 'qadf185');
 
         $query = "select count(*) as tasques from tasques as ta inner join categories as ca on ta.id_categoria = ca.id inner join taulells as t on ca.id_taulells = t.id where t.nom = '$idx2' and t.creador = '$idx'";
+
+        $resultat = mysqli_query($link, $query);
+
+        $row = mysqli_fetch_assoc($resultat);
+
+        echo $row["tasques"];
+
+        mysqli_close($link);
+	}
+	
+	//obtenir total tasques del taulell en concret
+	function obtain_tasques_taulell_propi_no_fi($idx,$idx2){
+		
+		$link = mysqli_connect('217.76.150.88', 'qadf185', '1234Asdf', 'qadf185');
+
+        $query = "select count(*) as tasques from tasques as ta inner join categories as ca on ta.id_categoria = ca.id inner join taulells as t on ca.id_taulells = t.id where t.nom = '$idx2' and t.creador = '$idx' and ta.estat <> 3";
+
+        $resultat = mysqli_query($link, $query);
+
+        $row = mysqli_fetch_assoc($resultat);
+
+        echo $row["tasques"];
+
+        mysqli_close($link);
+	}
+	
+	//obtenir total tasques del taulell en concret
+	function obtain_tasques_taulell_propi_fi($idx,$idx2){
+		
+		$link = mysqli_connect('217.76.150.88', 'qadf185', '1234Asdf', 'qadf185');
+
+        $query = "select count(*) as tasques from tasques as ta inner join categories as ca on ta.id_categoria = ca.id inner join taulells as t on ca.id_taulells = t.id where t.nom = '$idx2' and t.creador = '$idx' and ta.estat = 3";
 
         $resultat = mysqli_query($link, $query);
 
