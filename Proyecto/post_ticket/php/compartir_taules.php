@@ -25,7 +25,7 @@
 
 		if (mysqli_affected_rows($link) > 0)
 		{
-			$queryxd = "insert into rols_usuaris_taulells (mail, id_rol, id_taulell) values ('$idx3', 4, '$idb')";
+			$queryxd = "insert into rols_usuaris_taulells (mail, id_rol, id_taulell) values ('$idx3', 3, '$idb')";
 			mysqli_query($link, $queryxd);
 			echo 1;
 		}

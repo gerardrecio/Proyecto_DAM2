@@ -287,11 +287,10 @@
                                                 obtain_total_tasques_per_usuari($_SESSION['email']);
                                             ?></h1>
                                         </div>
-                                        <!--<div class="metric-label d-inline-block float-right text-success font-weight-bold">
-                                            <span><i class="fa fa-fw fa-arrow-up"></i></span><span>5.86%</span>
-                                        </div>-->
+                                        <div class="float-right text-warning mr-3">
+                                            <i class="fas fa-3x fa-tasks"></i>
+                                        </div>
                                     </div>
-                                    <!--<div id="sparkline-revenue"></div>-->
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -303,11 +302,10 @@
                                                 obtain_total_tasques_creades_usuari($_SESSION['email']);
                                             ?></h1>
                                         </div>
-                                        <!--<div class="metric-label d-inline-block float-right text-success font-weight-bold">
-                                            <span><i class="fa fa-fw fa-arrow-up"></i></span><span>5.86%</span>
-                                        </div>-->
+                                        <div class="float-right text-info mr-3">
+                                            <i class="fas fa-3x fa-tasks"></i>
+                                        </div>
                                     </div>
-                                    <!--<div id="sparkline-revenue2"></div>-->
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -319,11 +317,10 @@
 												obtain_total_tasques_assignades_usuari($_SESSION['email'])
 											?></h1>
                                         </div>
-                                        <!--<div class="metric-label d-inline-block float-right text-primary font-weight-bold">
-                                            <span>N/A</span>
-                                        </div>-->
+                                        <div class="float-right text-danger mr-3">
+                                            <i class="fas fa-3x fa-tasks"></i>
+                                        </div>
                                     </div>
-                                    <!--<div id="sparkline-revenue3"></div>-->
                                 </div>
                             </div>
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -335,11 +332,10 @@
 												obtain_taulells_participats($_SESSION['email'])
 											?></h1>
                                         </div>
-                                        <!--<div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
-                                            <span>-2.00%</span>
-                                        </div>-->
+                                        <div class="float-right text-primary mr-3">
+                                            <i class="fas fa-3x fa-tasks"></i>
+                                        </div>
                                     </div>
-                                    <!--<div id="sparkline-revenue4"></div>-->
                                 </div>
                             </div>
                         </div>
@@ -355,7 +351,7 @@
                                     <h5 class="card-header">Tasques Recents</h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
-                                            <table class="table">
+                                            <table class="table table-striped">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
                                                         <th class="border-0">#</th>
@@ -384,8 +380,21 @@
                         </div>
 
                         <div class="row">
-                            <canvas class="col-xl-6" id="myChart"></canvas>
-                            <canvas class="col-xl-6" id="myChart2"></canvas>
+
+                            <div class="card col-xl-6">
+                                <h5 class="card-header">Tasques que tinc assignades</h5>
+                                <div class="card-body">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+
+                            <div class="card col-xl-6">
+                                <h5 class="card-header">Tasques per taulell</h5>
+                                <div class="card-body">
+                                    <canvas id="myChart2"></canvas>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

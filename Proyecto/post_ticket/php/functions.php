@@ -96,7 +96,8 @@
         echo $texto;
 
     }
-
+	/*
+	
     function create_table_shared($idx){
 
         $texto; //rango de ids a comparar con las , puestas
@@ -168,13 +169,13 @@
             $final.= "<li class='nav-item'><a class='nav-link' href='mydashboard.php?id_taulell=$nomArray'>$nomArray</a></li>";
         }
 
-        //aqui es te que eliminar l'ultima coma de el text*/
+        //aqui es te que eliminar l'ultima coma de el text
 
         echo $final;
 		
 		mysqli_close($link);
 
-    }
+    }*/	
 	
 	function create_table_shared_new($idx){
 		$final;
@@ -196,7 +197,12 @@
 
             $nomArray = $valor['nom'];
 
-            $final.= "<li class='nav-item'><a class='nav-link' href='mydashboard.php?id_taulell=$nomArray'>$nomArray</a></li>";
+            $splited = explode("|", $nomArray);
+
+            $id = trim($splited[0]);
+            $email = trim($splited[1]);
+
+            $final.= "<li class='nav-item'><a class='nav-link' href='mydashboardshared.php?id_taulell=$id&email_creador=$email'>$nomArray</a></li>";
         }
 
         //aqui es te que eliminar l'ultima coma de el text*/
@@ -403,7 +409,14 @@
 
         $row = mysqli_fetch_assoc($resultat);
 
-        echo $row["tasques"];
+		if($row["tasques"] == "" or $row["tasques"] == null)
+		{
+			echo 0;
+		}
+		else
+		{
+			echo $row["tasques"];
+		}
 
         mysqli_close($link);
     }
@@ -414,7 +427,7 @@
         $link = mysqli_connect('217.76.150.88', 'qadf185', '1234Asdf', 'qadf185');
         //realitzem les operacions pertinents
 
-        $query = "select distinct count(ta.id) AS tasques from taulells as t inner join taulell_usuaris as tu ON t.id = tu.id_taulell inner join categories as ca ON t.id = ca.id_taulells inner join tasques as ta ON ca.id = ta.id_categoria group by t.creador, tu.mail HAVING  (t.creador = '$idx')";
+        $query = "select distinct count(ta.id) AS tasques from taulells as t inner join taulell_usuaris as tu ON t.id = tu.id_taulell inner join categories as ca ON t.id = ca.id_taulells inner join tasques as ta ON ca.id = ta.id_categoria group by ta.creador, tu.mail HAVING  (ta.creador = '$idx')";
 
         $resultat = mysqli_query($link, $query);
 
@@ -564,7 +577,12 @@
 			echo "<td>$row[5]</td>";
 			echo "</tr>";
 			$index = $index +1;
-		}
+        }
+        
+        if ($index == 1)
+        {
+            echo "<tr><td colspan='7' class='text-center'>No hi ha tasques</td></tr>";
+        }
 
         mysqli_close($link);
     }

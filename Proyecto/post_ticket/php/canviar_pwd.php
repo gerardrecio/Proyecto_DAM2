@@ -8,24 +8,39 @@
 	}
 	
 		$password = $_POST['pwd'];
+		$password_old = $_POST['pwd_old'];
 		$idx2 = trim($_POST['email']);
 
-		$pwdcrypt = password_hash($password, PASSWORD_BCRYPT);
+		$queryxd = "SELECT pwd FROM usuaris WHERE mail = '$idx2'";
 
+		$res = mysqli_query($link, $queryxd);
 
-		$query = "UPDATE usuaris SET pwd = '$pwdcrypt' WHERE mail = '$idx2'";
+		$row = mysqli_fetch_assoc($res);
 
-		$row = mysqli_query($link, $query);
+		$pwdold_crypted = $row["pwd"];
 
-		if (mysqli_affected_rows($link) > 0)
+		if (password_verify($password_old, $pwdold_crypted))
 		{
-			echo 1;
+			$pwdcrypt = password_hash($password, PASSWORD_BCRYPT);
+
+			$query = "UPDATE usuaris SET pwd = '$pwdcrypt' WHERE mail = '$idx2'";
+	
+			$row = mysqli_query($link, $query);
+	
+			if (mysqli_affected_rows($link) > 0)
+			{
+				echo 1;
+			}
+			else
+			{
+				echo 0;
+			}
 		}
 		else
 		{
 			echo 0;
 		}
-
+		
 	mysqli_close();
 
 ?>

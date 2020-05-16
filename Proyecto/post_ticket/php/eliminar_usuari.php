@@ -58,6 +58,10 @@
 			$i = $i +1;
 		}
 		
+		$query6 = "delete from rols_usuaris_taulells where id_taulell = '$idtaula' and mail = '$idx'";
+		
+		$row = mysqli_query($link, $query6);
+		
 	mysqli_close();
 
 ?>

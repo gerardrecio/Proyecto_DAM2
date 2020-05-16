@@ -36,7 +36,7 @@ $(document).ready(function(){
   
               var nom_indicat = $('#nom_taulell').val();
               
-              $.post('php/create_table.php', {name_table: nom_indicat, correu: "perichors@gmail.com"}, 
+              $.post('php/create_table.php', {name_table: nom_indicat, correu: email}, 
               
               function(data){
                 

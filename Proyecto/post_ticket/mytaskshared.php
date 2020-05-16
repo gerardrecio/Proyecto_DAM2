@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="js/main_tasks.js"></script>
+    <script src="js/main_tasks_shared.js"></script>
     <title>Post-Ticket - Inicio</title>
 </head>
 
@@ -141,7 +141,7 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h2 class="pageheader-title">Taulells Propis</h2>
+                                <h2 class="pageheader-title">Taulells Compartits</h2>
                                 <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
@@ -188,12 +188,13 @@
                                 <div class="xrebre_missatges">
                                 </div>
 
-                                <div class="col-xl-2 input-group input-group-sm mb-4 mt-5">
+                                <div class="col-xl-2 input-group input-group-sm mb-3 mt-5">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-sm">Data Limit: </span>
                                     </div>
                                     <input type="text" class="form-control xdata_limit" aria-label="Small" aria-describedby="inputGroup-sizing-sm" disabled>
                                 </div>
+                                
                                 <div class="col-xl">
                                     <button type="button" class="btn btn-primary xcanviar_data">Canviar Data</button>
                                 </div>

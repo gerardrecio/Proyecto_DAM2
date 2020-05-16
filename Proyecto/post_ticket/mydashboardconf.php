@@ -89,7 +89,7 @@
                                             <div id="submenu-1-1" class="collapse submenu">
                                                 <ul class="nav flex-column">
                                                     <?php
-														create_table_shared($_SESSION['email']);
+														create_table_shared_new($_SESSION['email']);
 													?>
 												</ul>
                                             </div>
@@ -119,7 +119,7 @@
                                             <a class="nav-link" href="account.php">Compte</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="../LogIn/index.php">Tancar Sessió</a>
+                                            <a class="nav-link" href="php/logout.php">Tancar Sessió</a>
                                         </li>
                                     </ul>
                                 </div>

@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="js/main_dashboard.js"></script>
+    <script src="js/main_dashboard_shared.js"></script>
     <title>Post-Ticket - Inicio</title>
 </head>
 
@@ -493,7 +493,7 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h2 class="pageheader-title">Taulells Propis</h2>
+                                <h2 class="pageheader-title">Taulells Compartits</h2>
                                 <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
@@ -520,7 +520,7 @@
                                         <h5 class="text-muted">Tasques Actuals</h5>
                                         <div class="metric-value d-inline-block">
                                             <h1 class="mb-1"><?php
-                                                obtain_tasques_taulell_propi_no_fi($_SESSION['email'],$_GET['id_taulell']);
+                                                obtain_tasques_taulell_propi_no_fi($_GET['email_creador'],$_GET['id_taulell']);
                                             ?></h1>
                                         </div>
                                         <div class="float-right text-warning mr-3">
@@ -535,7 +535,7 @@
                                         <h5 class="text-muted">Tasques Finalitzades</h5>
                                         <div class="metric-value d-inline-block">
                                             <h1 class="mb-1"><?php
-                                                obtain_tasques_taulell_propi_fi($_SESSION['email'],$_GET['id_taulell']);
+                                                obtain_tasques_taulell_propi_fi($_GET['email_creador'],$_GET['id_taulell']);
                                             ?></h1>
                                         </div>
                                         <div class="float-right text-info mr-3">
@@ -550,7 +550,7 @@
                                         <h5 class="text-muted">Tasques Totals</h5>
                                         <div class="metric-value d-inline-block">
                                             <h1 class="mb-1"><?php
-												obtain_tasques_taulell_propi($_SESSION['email'],$_GET['id_taulell'])
+												obtain_tasques_taulell_propi($_GET['email_creador'],$_GET['id_taulell'])
 											?></h1>
                                         </div>
                                         <div class="float-right text-primary mr-3">
@@ -620,7 +620,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h3 class="font-16">Ordenar per Data</h3>
-                                        <select class="form-control xdata">
+                                        <select class="form-control">
                                             <option>Ascendent</option>
                                             <option>Descendent</option>
                                         </select>

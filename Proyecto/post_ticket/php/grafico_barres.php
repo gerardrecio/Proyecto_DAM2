@@ -9,7 +9,7 @@
 	
 		$idx = trim($_POST['correo']);
 
-		$query = "select t.nom,count(ta.titol) as contador from taulells as t inner join categories as ca on t.id = ca.id_taulells inner join tasques as ta on ca.id = ta.id_categoria group by t.nom, t.creador having creador = '$idx'";
+		$query = "select t.nom,count(ta.titol) as contador from taulells as t inner join categories as ca on t.id = ca.id_taulells inner join tasques as ta on ca.id = ta.id_categoria inner join taulell_usuaris as tu on t.id = tu.id_taulell group by t.nom, t.creador, tu.mail having creador = '$idx' or tu.mail = '$idx'";
 
 		$res = mysqli_query($link, $query);
 

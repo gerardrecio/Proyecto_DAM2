@@ -3,29 +3,103 @@ $(document).ready(function(){
   //aqui toca fer la paginacio masiva
 
   var nom_taulell = new URLSearchParams(window.location.search).get('id_taulell'); //obte el parametre de la URL en format GET
+  var nom_creador = new URLSearchParams(window.location.search).get('email_creador'); //obte el parametre de la URL en format GET
 
   $.post("php/obtenir_dades.php", function(data){
 
     var email = data;
 
-      $.post("php/obtain_categories.php", {nom_taulell: nom_taulell, creador: email}, 
-        
+        $.post("php/obtenir_rol_usuari.php", {id_taulell: nom_taulell, usuari: email, creador: nom_creador}, 
+          
         function(data){
 
-          var parsed = JSON.parse(data);
+          var rol = data;
 
-          for (i = 0; i < parsed.length; i++)
+          if (rol == 3)
           {
-            $(".xbuscador_categories").append(
-              
-            "<div class='custom-control custom-checkbox'>"+
-            "<input type='checkbox' class='custom-control-input' id='customCheck_"+i+"'>"+
-            "<label class='custom-control-label customCheck_"+i+"' for='customCheck_"+i+"'>"+parsed[i].nom+"</label>"+
-            "</div>"
-            );
+            $(".xcrear_tasca").addClass("d-none");
           }
-    });
+
+          if (rol == 2)
+          {
+            $(".xcrear_tasca").addClass("d-none");
+          }
+
+        });
+
+      carregar_taulell(0, 10);
+
+      $.post("php/pagination.php", {id_taulell: nom_taulell, creador: nom_creador}, 
+    
+        function(data){
+
+          console.log(data);
+
+          var total_pagines = data / 10;
+
+          console.log(total_pagines);
+
+          if (total_pagines < 1)
+          {
+            $(".xpagination").append('<li class="page-item active"><a class="page-link" href="#">1</a></li>');
+          }
+          else
+          {
+            for (i = 0; i < total_pagines; i++)
+            {
+              var n = i+1;
+              if (i == 0)
+              {
+                $(".xpagination").append('<li class="page-item active"><a class="page-link xnumero" href="#">'+n+'</a></li>');
+              }
+              else
+              {
+                $(".xpagination").append('<li class="page-item"><a class="page-link xnumero" href="#">'+n+'</a></li>');
+              }
+            }
+          }
+        }
+      )
   });
+
+
+  $.post("php/obtain_categories.php", {nom_taulell: nom_taulell, creador: nom_creador}, 
+        
+  function(data){
+
+    var parsed = JSON.parse(data);
+
+    for (i = 0; i < parsed.length; i++)
+    {
+      $(".xbuscador_categories").append(
+        
+      "<div class='custom-control custom-checkbox'>"+
+      "<input type='checkbox' class='custom-control-input' id='customCheck_"+i+"'>"+
+      "<label class='custom-control-label customCheck_"+i+"' for='customCheck_"+i+"'>"+parsed[i].nom+"</label>"+
+      "</div>"
+      );
+    }
+  });
+
+  $.post("php/obtain_usuaris_per_taulell.php", {nom_taulell: nom_taulell, creador: nom_creador}, 
+        
+  function(data){
+
+    var parsed = JSON.parse(data);
+
+    for (i = 0; i < parsed.length; i++)
+    {
+      $(".xbuscador_usuaris").append(
+        
+      "<div class='custom-control custom-checkbox'>"+
+      "<input type='checkbox' class='custom-control-input' id='customChk_"+i+"'>"+
+      "<label class='custom-control-label customChk_"+i+"' for='customChk_"+i+"'>"+parsed[i].mail+"</label>"+
+      "</div>"
+      );
+    }
+  });
+
+
 
   $(".xbtn_buscar").on("click", function(e){
 
@@ -53,6 +127,102 @@ $(document).ready(function(){
     });
 
 
+    $(".xpagination").on('click', '.xnumero_filtre', function(){
+      //removem el active als que hu tinguin
+      $('.page-item').removeClass('active');
+      $(this).parent().addClass('active');  //assignem el active al que toca
+  
+      var valor = $(this)[0].text;
+      //eliminem la taula
+      $(".xcrear_tauladash").empty();
+      //FALTA re-crear la taula
+  
+      var cat = [];
+      var users = [];
+      
+      $('.xbuscador_categories input[type=checkbox]').each(function () {
+  
+        if (this.checked)
+        {
+          var nom = $("."+this.id)[0].textContent;
+          cat.push(nom);
+        }
+      });
+  
+      $('.xbuscador_usuaris input[type=checkbox]').each(function () {
+  
+        if (this.checked)
+        {
+          var nom = $("."+this.id)[0].textContent;
+          users.push(nom);
+        }
+      });
+  
+  
+      $.post("php/obtenir_dades.php", function(data){
+  
+        var email = data;
+        var ordenacio = $(".xdata option:selected").text();
+  
+        var ord;
+  
+        if (ordenacio === "Ascendent")
+        {
+          ord = 0;
+        }
+        else
+        {
+          ord = 1;
+        }
+  
+        //console.log(cat);
+        //console.log(users);
+        //console.log(nom_taulell);
+        //console.log(email);
+        //console.log(ord);
+  
+        $.post("php/obtenir_taulell_filtre.php", {id_taulell: nom_taulell, creador: nom_creador, categories: cat, usuaris: users, order: ord}, 
+        
+        function(data){
+  
+          //console.log(data);
+  
+          //removem tota la taula
+          $(".xcrear_tauladash").empty();
+          //re invoquem la taula amb les noves dades
+          var dades_taulell = JSON.parse(data);
+  
+          //console.log(dades_taulell);
+  
+          if (dades_taulell.length == 0)
+          {
+            $(".xcrear_tauladash").append('<tr><td colspan="7" class="text-center">No hi ha tasques</td></tr>');
+          }
+          else
+          {
+            var valor_minim = (valor-1) * 10;
+            for (i = valor_minim; i < valor_minim+10; i++)
+            {
+              var xt = dades_taulell[i].color;
+  
+              //console.log(xt);
+  
+              if (xt == 1)
+              {
+                var xcolor = "<span class='badge-dot badge-warning mr-1'></span>";
+              }
+              else
+              {
+                var xcolor = "<span class='badge-dot badge-success mr-1'></span>";
+              }
+              $(".xcrear_tauladash").append('<tr><th scope="row">'+dades_taulell[i].id+'</th><td>'+dades_taulell[i].titol+'</td><td>'+dades_taulell[i].categoria+'</td><td>'+dades_taulell[i].asignat+'</td><td>'+dades_taulell[i].data_limit+'</td><td>'+xcolor+dades_taulell[i].estat+'</td><td><button class="btn btn-primary xanar_tasca">Veure Tasca</button></td></tr>');
+            }
+          }
+        });
+      });
+    });
+
+
     $.post("php/obtenir_dades.php", function(data){
 
       var email = data;
@@ -75,7 +245,7 @@ $(document).ready(function(){
       //console.log(email);
       //console.log(ord);
 
-      $.post("php/obtenir_taulell_filtre.php", {id_taulell: nom_taulell, creador: email, categories: cat, usuaris: users, order: ord}, 
+      $.post("php/obtenir_taulell_filtre.php", {id_taulell: nom_taulell, creador: nom_creador, categories: cat, usuaris: users, order: ord}, 
       
       function(data){
 
@@ -139,63 +309,10 @@ $(document).ready(function(){
 
   });
 
-  $.post("php/obtenir_dades.php", function(data){
 
-    var email = data;
 
-      $.post("php/obtain_usuaris_per_taulell.php", {nom_taulell: nom_taulell, creador: email}, 
-        
-        function(data){
 
-          var parsed = JSON.parse(data);
 
-          for (i = 0; i < parsed.length; i++)
-          {
-            $(".xbuscador_usuaris").append(
-              
-            "<div class='custom-control custom-checkbox'>"+
-            "<input type='checkbox' class='custom-control-input' id='customChk_"+i+"'>"+
-            "<label class='custom-control-label customChk_"+i+"' for='customChk_"+i+"'>"+parsed[i].mail+"</label>"+
-            "</div>"
-            );
-          }
-    });
-  });
-
-  $.post("php/obtenir_dades.php", function(data){
-
-    var email = data;
-
-      carregar_taulell(0, 10);
-
-      $.post("php/pagination.php", {id_taulell: nom_taulell, creador: email}, 
-    
-        function(data){
-
-          var total_pagines = data / 10;
-
-          if (total_pagines < 1)
-          {
-            $(".xpagination").append('<li class="page-item active"><a class="page-link" href="#">1</a></li>');
-          }
-          else
-          {
-            for (i = 0; i < total_pagines; i++)
-            {
-              var n = i+1;
-              if (i == 0)
-              {
-                $(".xpagination").append('<li class="page-item active"><a class="page-link xnumero" href="#">'+n+'</a></li>');
-              }
-              else
-              {
-                $(".xpagination").append('<li class="page-item"><a class="page-link xnumero" href="#">'+n+'</a></li>');
-              }
-            }
-          }
-        }
-      )
-  });
 
 
   $(".xcrear_tasca").on("click", function(){
@@ -204,21 +321,15 @@ $(document).ready(function(){
 
       var email = data;
 
-        $.post("php/obtain_categories_taulell.php", {nom_taulell: nom_taulell, creador: email}, 
+        $.post("php/obtain_categories_taulell.php", {nom_taulell: nom_taulell, creador: nom_creador}, 
         
         function(data){
 
           var parsed = JSON.parse(data);
 
-          if (parsed.length == 0)
-          {
-            Swal.fire({
-              icon: 'error',
-              title: 'Creació Tasca',
-              text: 'No hi han categories, tens que crear primer una categoria'
-            })
-          }
-          else
+          console.log(parsed);
+
+          if (parsed.length > 0)
           {
             var cat = "";
 
@@ -227,7 +338,7 @@ $(document).ready(function(){
               cat+="<option>"+parsed[i].nom+"</option>";
             }
   
-            $.post("php/obtain_usuaris_per_taulell.php", {nom_taulell: nom_taulell, creador: email}, 
+            $.post("php/obtain_usuaris_per_taulell.php", {nom_taulell: nom_taulell, creador: nom_creador}, 
             
             function(data){
   
@@ -285,8 +396,16 @@ $(document).ready(function(){
   
                   //si el formulari es correcte
                   if (formValues) {
+                      console.log(formValues);
+                      console.log(email);
+                      console.log(nom_taulell);
+                      console.log(formValues[0]);
+                      console.log(formValues[1]);
+                      console.log(formValues[2]);
+                      console.log(formValues[3]);
+                      console.log(formValues[4]);
   
-                      $.post("php/crear_tasca.php", {creador: email, nom_taulell: nom_taulell, nom: formValues[0], data_limit: formValues[1], assignat: formValues[4], categoria: formValues[3], missatge: formValues[2], creador_tasca: email}, 
+                      $.post("php/crear_tasca.php", {creador: nom_creador, nom_taulell: nom_taulell, nom: formValues[0], data_limit: formValues[1], assignat: formValues[4], categoria: formValues[3], missatge: formValues[2], creador_tasca: email}, 
                       
                       function(data){
   
@@ -298,7 +417,6 @@ $(document).ready(function(){
                             'success'
                           )
   
-                          //aqui fa el refresh de la taula
                                   //removem tota la taula
                           $(".xcrear_tauladash").empty();
                           //removem la paginacio
@@ -310,11 +428,15 @@ $(document).ready(function(){
                         
                               carregar_taulell(0, 10);
                         
-                              $.post("php/pagination.php", {id_taulell: nom_taulell, creador: email}, 
+                              $.post("php/pagination.php", {id_taulell: nom_taulell, creador: nom_creador}, 
                             
                                 function(data){
                         
+                                  console.log(data);
+                        
                                   var total_pagines = data / 10;
+                        
+                                  console.log(total_pagines);
                         
                                   if (total_pagines < 1)
                                   {
@@ -352,8 +474,18 @@ $(document).ready(function(){
                     }
                   }
               )();
+  
+            });
+          }
+          else
+          {
+            Swal.fire({
+              icon: 'error',
+              title: 'Creació Tasca',
+              text: 'No hi han categories, tens que crear primer una categoria'
             })
           }
+
         });
     });
   });
@@ -366,11 +498,11 @@ $(document).ready(function(){
       var fins = cantitat + i;
       var email = data;
   
-        $.post("php/obtenir_taulell.php", {id_taulell: nom_taulell, creador: email}, 
+        $.post("php/obtenir_taulell.php", {id_taulell: nom_taulell, creador: nom_creador}, 
         
           function(data){
             var dades_taulell = JSON.parse(data);
-            //console.log(dades_taulell);
+            console.log(dades_taulell);
 
             if (dades_taulell.length == 0)
             {
@@ -382,7 +514,7 @@ $(document).ready(function(){
               {
                 var xt = dades_taulell[i].color;
   
-                //console.log(xt);
+                console.log(xt);
   
                 if (xt == 1)
                 {
@@ -408,103 +540,8 @@ $(document).ready(function(){
       var categoria = $(this).parent().parent().children()[2].textContent;
       var estat = $(this).parent().parent().children()[5].textContent;
 
-      window.location.href = "mytask.php?id_taulell="+nom_taulell+"&email="+email+"&tasca="+tasca+"&idtasca="+id+"&categoria="+categoria+"&estat="+estat;
+      window.location.href = "mytaskshared.php?id_taulell="+nom_taulell+"&email="+email+"&tasca="+tasca+"&idtasca="+id+"&categoria="+categoria+"&estat="+estat;
 
-  });
-
-  $(".xpagination").on('click', '.xnumero_filtre', function(){
-    //removem el active als que hu tinguin
-    $('.page-item').removeClass('active');
-    $(this).parent().addClass('active');  //assignem el active al que toca
-
-    var valor = $(this)[0].text;
-    //eliminem la taula
-    $(".xcrear_tauladash").empty();
-    //FALTA re-crear la taula
-
-    var cat = [];
-    var users = [];
-    
-    $('.xbuscador_categories input[type=checkbox]').each(function () {
-
-      if (this.checked)
-      {
-        var nom = $("."+this.id)[0].textContent;
-        cat.push(nom);
-      }
-    });
-
-    $('.xbuscador_usuaris input[type=checkbox]').each(function () {
-
-      if (this.checked)
-      {
-        var nom = $("."+this.id)[0].textContent;
-        users.push(nom);
-      }
-    });
-
-
-    $.post("php/obtenir_dades.php", function(data){
-
-      var email = data;
-      var ordenacio = $(".xdata option:selected").text();
-
-      var ord;
-
-      if (ordenacio === "Ascendent")
-      {
-        ord = 0;
-      }
-      else
-      {
-        ord = 1;
-      }
-
-      //console.log(cat);
-      //console.log(users);
-      //console.log(nom_taulell);
-      //console.log(email);
-      //console.log(ord);
-
-      $.post("php/obtenir_taulell_filtre.php", {id_taulell: nom_taulell, creador: email, categories: cat, usuaris: users, order: ord}, 
-      
-      function(data){
-
-        //console.log(data);
-
-        //removem tota la taula
-        $(".xcrear_tauladash").empty();
-        //re invoquem la taula amb les noves dades
-        var dades_taulell = JSON.parse(data);
-
-        //console.log(dades_taulell);
-
-        if (dades_taulell.length == 0)
-        {
-          $(".xcrear_tauladash").append('<tr><td colspan="7" class="text-center">No hi ha usuaris</td></tr>');
-        }
-        else
-        {
-          var valor_minim = (valor-1) * 10;
-          for (i = valor_minim; i < valor_minim+10; i++)
-          {
-            var xt = dades_taulell[i].color;
-
-            //console.log(xt);
-
-            if (xt == 1)
-            {
-              var xcolor = "<span class='badge-dot badge-warning mr-1'></span>";
-            }
-            else
-            {
-              var xcolor = "<span class='badge-dot badge-success mr-1'></span>";
-            }
-            $(".xcrear_tauladash").append('<tr><th scope="row">'+dades_taulell[i].id+'</th><td>'+dades_taulell[i].titol+'</td><td>'+dades_taulell[i].categoria+'</td><td>'+dades_taulell[i].asignat+'</td><td>'+dades_taulell[i].data_limit+'</td><td>'+xcolor+dades_taulell[i].estat+'</td><td><button class="btn btn-primary xanar_tasca">Veure Tasca</button></td></tr>');
-          }
-        }
-      });
-    });
   });
 
   $(".xpagination").on('click', '.xnumero', function(){

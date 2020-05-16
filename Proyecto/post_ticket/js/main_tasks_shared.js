@@ -12,93 +12,25 @@ $(document).ready(function(){
 
   $(".xnom_tasca").append("Tasca: "+nom_tasca);
 
-  //obtenir les categories
-  $.post("php/obtenir_dades.php", function(data){
-
-    var email = data;
-
-    $.post("php/obtain_categories.php", {nom_taulell: nom_taulelljs, creador: email}, 
-    
+  $.post("php/obtain_dades_creador_taulell_shared.php", {id_tasca: id}, 
+  
     function(data){
 
-      var parsed = JSON.parse(data);
+    var nom_creador = data;
 
+    console.log(nom_creador);
+
+    $.post("php/obtain_categories.php", {nom_taulell: nom_taulelljs, creador: nom_creador}, 
+  
+    function(data){
+  
+      var parsed = JSON.parse(data);
+  
       for (i = 0; i < parsed.length; i++)
       {
         $(".xcategoria_form").append("<option>"+parsed[i].nom+"</option");
       }
     });
-  });
-
-  //al fer doble click al espai disabled de la data LIMIT
-  $(".xcanviar_data").on("click", function(){
-
-    if ($(".xdata_limit").attr("disabled") == "disabled")
-    {
-      //es te que treure el disabled y posar el camp en format DATE
-      $(".xdata_limit").attr("disabled", false);
-      $(".xdata_limit").attr("type", "date");
-    }
-    else
-    {
-      var mydata = $(".xdata_limit").val();
-      console.log(mydata);
-
-      if (mydata == '')
-      {
-        Swal.fire({
-          icon: 'error',
-          title: 'Canviar Data',
-          text: 'La data no s\'ha pogut canviar'
-        });
-      }
-      else
-      {
-        $.post("php/canviar_datamytask.php", {id_tasca: id, data_nova: mydata}, 
-      
-        function(data){
-          
-          if (data == 1)
-          { 
-            Swal.fire({
-              icon: 'success',
-              title: 'Canviar Data',
-              text: 'Data canviada correctament'
-            });
-  
-            $(".xdata_limit").attr("disabled", true);
-  
-            $.post("php/obtain_dades_tasca.php", {id_tasca: id}, 
-            function(data){
-          
-              var parsed = JSON.parse(data);
-          
-              console.log(parsed);
-          
-              if (parsed[0].data_valor == 0)
-              {
-                $(".xenviar_boto").prop("disabled", true);
-                $("#exampleFormControlTextarea1").prop("disabled", true);
-              }
-              else
-              {
-                $(".xenviar_boto").prop("disabled", false);
-                $("#exampleFormControlTextarea1").prop("disabled", false);
-              }
-            }); 
-          }
-          else
-          {
-            Swal.fire({
-              icon: 'error',
-              title: 'Canviar Data',
-              text: 'La data no s\'ha pogut canviar'
-            });
-          }
-        });
-      }
-
-    }
   });
 
 
@@ -121,10 +53,99 @@ $(document).ready(function(){
       $(".xenviar_boto").prop("disabled", true);
       $("#exampleFormControlTextarea1").prop("disabled", true);
     }
+
+    $.post("php/obtenir_rol_usuari.php", {id_taulell: nom_taulelljs, usuari: email, creador: parsed[0].creador}, 
+          
+    function(data){
+
+      var rol = data;
+
+      if (rol == 3)
+      {
+        $(".xcategoria_form").addClass("d-none");
+        $(".xestat_form").addClass("d-none");
+        $(".xassignat_form").addClass("d-none");
+        $(".xcanviar_data").addClass("d-none");
+      }
+      
+      if (rol == 2 && (parsed[0].asignat != email))
+      {
+        $(".xcategoria_form").addClass("d-none");
+        $(".xestat_form").addClass("d-none");
+        $(".xassignat_form").addClass("d-none");
+        $(".xcanviar_data").addClass("d-none");
+      }
+
+      if (rol == 2 && (parsed[0].asignat == email))
+      {
+        $(".xassignat_form").addClass("d-none");
+      }
+    });
+
   }); 
 
+  //al fer doble click al espai disabled de la data LIMIT
+  $(".xcanviar_data").on("click", function(){
+
+    if ($(".xdata_limit").attr("disabled") == "disabled")
+    {
+      //es te que treure el disabled y posar el camp en format DATE
+      $(".xdata_limit").attr("disabled", false);
+      $(".xdata_limit").attr("type", "date");
+    }
+    else
+    {
+      var mydata = $(".xdata_limit").val();
+      console.log(mydata);
+
+      $.post("php/canviar_datamytask.php", {id_tasca: id, data_nova: mydata}, 
+      
+      function(data){
+        
+        if (data == 1)
+        {
+          Swal.fire({
+            icon: 'success',
+            title: 'Canviar Data',
+            text: 'Data canviada correctament'
+          });
+          
+          $(".xdata_limit").attr("disabled", true);
+
+          $.post("php/obtain_dades_tasca.php", {id_tasca: id}, 
+          function(data){
+        
+            var parsed = JSON.parse(data);
+        
+            console.log(parsed);
+        
+            if (parsed[0].data_valor == 0)
+            {
+              $(".xenviar_boto").prop("disabled", true);
+              $("#exampleFormControlTextarea1").prop("disabled", true);
+            }
+            else
+            {
+              $(".xenviar_boto").prop("disabled", false);
+              $("#exampleFormControlTextarea1").prop("disabled", false);
+            }
+          });
+        }
+        else
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'Canviar Data',
+            text: 'La data no s\'ha pogut canviar'
+          });
+        }
+      });
+    }
+  });
+
   //obtenir els textos
-  $.post("php/obtenir_dades.php", function(data){
+
+  $.post("php/obtain_dades_creador_taulell_shared.php", {id_tasca: id}, function(data){
 
     var email = data;
 
@@ -174,7 +195,7 @@ $(document).ready(function(){
     }
   });
 
-  $.post("php/obtenir_dades.php", function(data){
+  $.post("php/obtain_dades_creador_taulell_shared.php", {id_tasca: id}, function(data){
 
     var email = data;
 
@@ -208,7 +229,7 @@ $(document).ready(function(){
 
             if (data == 1)
             {
-              var actual = $(".xasignat_task")[0].textContent.split(":")[1].trim();
+              var actual = $(".xnom_creador")[0].textContent.split(":")[1].trim();
 
               var MyDate = new Date();
               var MyDateString;

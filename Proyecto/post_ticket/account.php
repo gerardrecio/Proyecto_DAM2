@@ -87,7 +87,7 @@
                                             <div id="submenu-1-1" class="collapse submenu">
                                                 <ul class="nav flex-column">
                                                     <?php
-														create_table_shared($_SESSION['email']);
+														create_table_shared_new($_SESSION['email']);
 													?>
 												</ul>
                                             </div>
@@ -228,7 +228,7 @@
                                                     <h3 class="section-title">Estats dels meus taulells</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h1 class="mb-1">
@@ -239,7 +239,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h1 class="mb-1">
@@ -250,7 +250,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h1 class="mb-1">
@@ -261,17 +261,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h1 class="mb-1">
-														<?php
-															obtain_incidencies_finalitzat($_SESSION['email'])
-														?></h1>
-                                                        <p>Taulells finalitzats</p>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
 										<div class="row">
                                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -279,18 +268,8 @@
                                                     <h3 class="section-title">Estats de les meves tasques</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h1 class="mb-1">
-														<?php
-															obtain_tasques_creades($_SESSION['email'])
-														?></h1>
-                                                        <p>Tasques creades</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h1 class="mb-1">
@@ -301,7 +280,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h1 class="mb-1">
@@ -312,7 +291,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                                                 <div class="card">
                                                     <div class="card-body">
                                                         <h1 class="mb-1">
@@ -333,7 +312,11 @@
                                                     <div class="row">
                                                         <div class="offset-xl-3 col-xl-6 offset-lg-3 col-lg-3 col-md-12 col-sm-12 col-12 p-4">
                                                             <div class="form-group">
-                                                                <label for="pwd">Contrasenya</label>
+                                                                <label for="pwdold">Contrasenya Actual</label>
+                                                                <input type="password" class="form-control form-control-lg xpassword_old" id="pwdold" placeholder="">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="pwd">Contrasenya Nova</label>
                                                                 <input type="password" class="form-control form-control-lg xpassword2" id="pwd" placeholder="">
                                                             </div>
 															<div class="form-group">
